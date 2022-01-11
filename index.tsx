@@ -7,8 +7,7 @@ import Layout from './src/components/Layout/Layout';
 import Products from './src/components/Shop/Products';
 import Notification from './src/components/UI/Notification';
 import store from './src/store';
-import { sendCartData } from './src/store/cart-slice';
-
+import { fetchCartData, sendCartData } from './src/store/cart-actions';
 import './style.css';
 
 let isInitial = true;
@@ -18,6 +17,10 @@ function App() {
   const showCart = useSelector((state) => state.ui.cartIsVisible);
   const cart = useSelector((state) => state.cart);
   const notification = useSelector((state) => state.ui.notification);
+
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, []);
 
   useEffect(() => {
     // const sendCartData = async () => {
