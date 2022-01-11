@@ -6,7 +6,7 @@ const ProductItem = (props) => {
   const { title, price, description } = props;
 
   return (
-    <li className="item">
+    <li className="product-item">
       <Card>
         <header>
           <h3>{title}</h3>

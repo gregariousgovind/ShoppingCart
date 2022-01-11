@@ -5,7 +5,7 @@ const CartItem = (props) => {
   const { title, quantity, total, price } = props.item;
 
   return (
-    <li className="item">
+    <li className="cart-item">
       <header>
         <h3>{title}</h3>
         <div className="price">

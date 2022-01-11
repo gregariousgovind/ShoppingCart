@@ -3,7 +3,7 @@ import './CartButton.scss';
 
 const CartButton = (props) => {
   return (
-    <button className="button">
+    <button className="cart-button">
       <span>My Cart</span>
       <span className="badge">1</span>
     </button>
