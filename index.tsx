@@ -7,7 +7,7 @@ import Layout from './src/components/Layout/Layout';
 import Products from './src/components/Shop/Products';
 import Notification from './src/components/UI/Notification';
 import store from './src/store';
-import { uiActions } from './src/store/ui-slice';
+import { sendCartData } from './src/store/cart-slice';
 
 import './style.css';
 
@@ -20,47 +20,46 @@ function App() {
   const notification = useSelector((state) => state.ui.notification);
 
   useEffect(() => {
-    const sendCartData = async () => {
-      dispatch(
-        uiActions.showNotification({
-          status: 'pending',
-          title: 'Sending...',
-          message: 'Sending cart data!',
-        })
-      );
-      const response = await fetch(
-        'https://react-meals-c5ead-default-rtdb.firebaseio.com/cart.json',
-        {
-          method: 'PUT',
-          body: JSON.stringify(cart),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Sending cart data failed.');
-      }
-
-      dispatch(
-        uiActions.showNotification({
-          status: 'success',
-          title: 'Success...',
-          message: 'Sent cart data successfully!',
-        })
-      );
-    };
+    // const sendCartData = async () => {
+    // dispatch(
+    //   uiActions.showNotification({
+    //     status: 'pending',
+    //     title: 'Sending...',
+    //     message: 'Sending cart data!',
+    //   })
+    // );
+    // const response = await fetch(
+    //   'https://react-meals-c5ead-default-rtdb.firebaseio.com/cart.json',
+    //   {
+    //     method: 'PUT',
+    //     body: JSON.stringify(cart),
+    //   }
+    // );
+    // if (!response.ok) {
+    //   throw new Error('Sending cart data failed.');
+    // }
+    // dispatch(
+    //   uiActions.showNotification({
+    //     status: 'success',
+    //     title: 'Success...',
+    //     message: 'Sent cart data successfully!',
+    //   })
+    // );
+    // };
     if (isInitial) {
       isInitial = false;
       return;
     }
-    sendCartData().catch((error) => {
-      dispatch(
-        uiActions.showNotification({
-          status: 'error',
-          title: 'Error!',
-          message: 'Sending cart data failed!',
-        })
-      );
-    });
+    dispatch(sendCartData(cart));
+    // sendCartData().catch((error) => {
+    //   dispatch(
+    //     uiActions.showNotification({
+    //       status: 'error',
+    //       title: 'Error!',
+    //       message: 'Sending cart data failed!',
+    //     })
+    //   );
+    // });
   }, [cart, dispatch]);
   return (
     <Fragment>
