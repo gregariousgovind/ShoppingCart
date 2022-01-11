@@ -1,8 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+
 import Cart from './src/components/Cart/Cart';
 import Layout from './src/components/Layout/Layout';
 import Products from './src/components/Shop/Products';
+import store from './src/store';
 
 import './style.css';
 
@@ -15,4 +18,9 @@ function App() {
   );
 }
 
-render(<App />, document.getElementById('root'));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
